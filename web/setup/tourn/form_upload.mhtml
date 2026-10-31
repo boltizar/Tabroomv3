@@ -1,4 +1,5 @@
 <%args>
+	$person
 	$tourn
 	$label              => undef
 	$new_form           => undef
@@ -37,6 +38,13 @@
 		system $Tab::s3_cmd." put $filetemp ".$Tab::s3_bucket."/tourns/".$tourn->id."/school_form/".$form->id."/".$filename;
 		$msg = "Form ".$form->label." created for schools to download &amp; re-upload";
 
+		$m->comp("/funclib/form_log.mas",
+			person => $person->id,
+			tourn  => $tourn->id,
+			form   => "School form template",
+			new    => $filename
+		);
+
 	} elsif ($entry_release_form) {
 
 		my $req = Apache2::Request->new($r);
@@ -55,6 +63,13 @@
 		$tourn->setting("entry_release", $filename);
 		$msg = "Entry release form template has been uploaded";
 
+		$m->comp("/funclib/form_log.mas",
+			person => $person->id,
+			tourn  => $tourn->id,
+			form   => "Release form template",
+			new    => $filename
+		);
+
 	} elsif ($judge_release_form) {
 
 		my $req = Apache2::Request->new($r);
@@ -72,6 +87,13 @@
 			system $Tab::s3_cmd." put $filetemp ".$Tab::s3_bucket."/tourns/".$tourn->id."/judge_release/".$filename;
 			$tourn->setting("judge_release", $filename);
 			$msg = "Judge form template has been uploaded";
+
+			$m->comp("/funclib/form_log.mas",
+				person => $person->id,
+				tourn  => $tourn->id,
+				form   => "Judge form template",
+				new    => $filename
+			);
 		}
 	}
 

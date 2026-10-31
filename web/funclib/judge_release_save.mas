@@ -44,11 +44,14 @@
 	$judge->setting("judge_release_at", "date", DateTime->now());
 	$judge->setting("judge_release_by", $person->id);
 
-	$m->comp("/funclib/log.mas",
-		type        => "registration",
-		tourn       => $tourn->id,
-		person      => $person->id,
-		description => "Judge form ".$filename." uploaded for ".$judge->first." ".$judge->last
+	$m->comp("/funclib/form_log.mas",
+		person  => $person->id,
+		tourn   => $tourn->id,
+		school  => ($judge->school ? $judge->school->id : undef),
+		form    => "Judge form",
+		subject => $judge->first." ".$judge->last,
+		old     => $existing,
+		new     => $filename
 	);
 
 	return $filename;

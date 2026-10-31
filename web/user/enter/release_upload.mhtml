@@ -1,4 +1,5 @@
 <%args>
+	$person
 	$tourn
 	$school_id => undef
 	$student_id => undef
@@ -62,6 +63,16 @@
 		my $filetemp = $upload->tempname;
 
 		my $reply = system $Tab::s3_cmd." put $filetemp ".$Tab::s3_bucket."/tourns/".$tourn->id."/".$folder."/".$school->id."/".$student->id."/".$filename;
+
+		$m->comp("/funclib/form_log.mas",
+			person  => $person->id,
+			tourn   => $tourn->id,
+			school  => $school->id,
+			form    => ucfirst($type)." form",
+			subject => $student->first." ".$student->last,
+			old     => $forms{$student->id},
+			new     => $filename
+		);
 
 		$forms{$student->id} = $filename;
 

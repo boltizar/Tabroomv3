@@ -24,11 +24,13 @@
 		$judge->setting("judge_release_at", 0);
 		$judge->setting("judge_release_by", 0);
 
-		$m->comp("/funclib/log.mas",
-			type        => "registration",
-			tourn       => $tourn->id,
-			person      => $person->id,
-			description => "Judge form ".$filename." deleted for ".$judge->first." ".$judge->last
+		$m->comp("/funclib/form_log.mas",
+			person  => $person->id,
+			tourn   => $tourn->id,
+			school  => ($judge->school ? $judge->school->id : undef),
+			form    => "Judge form",
+			subject => $judge->first." ".$judge->last,
+			old     => $filename
 		);
 
 		$msg = "Judge form deleted for ".$judge->first." ".$judge->last;

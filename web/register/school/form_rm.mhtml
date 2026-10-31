@@ -25,13 +25,13 @@
 
 	my $msg = "Form ".$reply_form->filename." has been deleted";
 
-	Tab::ChangeLog->create({
-		person      => $person,
-		tourn       => $tourn,
-		school      => $school->id,
-		tag         => "registration",
-		description => $msg
-	});
+	$m->comp("/funclib/form_log.mas",
+		person => $person->id,
+		tourn  => $tourn->id,
+		school => $school->id,
+		form   => "School form ".$reply_form->parent->label,
+		old    => $reply_form->filename
+	);
 
 	$reply_form->delete();
 
