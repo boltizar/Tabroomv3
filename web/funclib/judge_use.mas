@@ -470,7 +470,6 @@
 		}
 
 		#calculate rounds lost
-
 		my $flights = 1;
 		$flights = $round->flighted if $debates_per;
 

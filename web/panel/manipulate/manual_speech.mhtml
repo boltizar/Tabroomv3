@@ -65,6 +65,7 @@
 				and ballot.panel = panel.id
 				and panel.round = round.id
 				group by panel.id
+				limit 1
 			) as letter
 		from (entry, round)
 			left join school on school.id = entry.school
