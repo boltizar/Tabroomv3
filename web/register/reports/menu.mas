@@ -252,6 +252,11 @@
 %						}
 
 						<a
+							class = "<% ($whoami eq "forms_download") ? "dk" : "" %>blue full"
+							href  = "forms_download.mhtml"
+						>Download Forms</a>
+
+						<a
 							class = "<% $whoami eq "nats_status" ? "dk" : "" %>blue half"
 							href  = "nsda_school_status.mhtml"
 						>Status Report</a>
@@ -447,6 +452,18 @@
 							href  = "release_forms.mhtml"
 						>
 							Eligibility Documentation
+						</a>
+%					}
+
+%					if (
+%						@forms || $tourn_settings->{"school_upload"} || $tourn_settings->{"entry_release"}
+%						|| $tourn_settings->{"entry_upload"} || $tourn_settings->{"judge_release"}
+%					) {
+						<a
+							class = "<% ($whoami eq "forms_download") ? "dk" : "" %>blue half"
+							href  = "forms_download.mhtml"
+						>
+							Download Forms
 						</a>
 %					}
 
