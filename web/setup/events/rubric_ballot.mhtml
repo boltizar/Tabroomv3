@@ -249,6 +249,7 @@
 						setting_name   = "ballot_rubric"
 						property_value = 0
 						event_id       = "<% $event->id %>"
+						on_success     = "refresh"
 						onClick        = 'postConfirm("<% $warn %>", this, "setting_switch.mhtml"); fixVisual();'
 					></a>
 				</span>
