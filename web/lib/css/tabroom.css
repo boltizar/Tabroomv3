@@ -2061,6 +2061,11 @@ th.sortable {
 	padding-right : 16px;
 }
 
+th.nosort.sortable {
+	padding-right : 2px;
+	padding-left  : 2px;
+}
+
 .droppable {
 	min-height : 48px;
 }
