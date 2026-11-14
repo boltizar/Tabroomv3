@@ -160,8 +160,6 @@
 
 %		if ($ARGS{ballot_err}) {
 
-%			my $ballot_err = $m->comp("/funclib/editor_save.mas", text => $ARGS{ballot_err});
-
 			<h1 class="warning centeralign"
 				style="margin-top: 50px;"
 			>
@@ -177,7 +175,7 @@
 			</h2>
 
 			<h4 class="warning centeralign">
-				<% $ballot_err %>
+				<% $ARGS{ballot_err} %>
 			</h4>
 
 %		   if ($judge) {
