@@ -8,7 +8,7 @@
 	my $judge = Tab::Judge->retrieve($judge_id);
 	my $school = Tab::School->retrieve($school_id);
 
-	unless ($judge && $judge->category->tourn = $tourn) {
+	unless ($judge && $judge->category->tourn == $tourn) {
 		$m->comp("/funclib/abort.mas", message => "No judge found with that ID in this tournament");
 	}
 
