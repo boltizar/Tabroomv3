@@ -462,8 +462,6 @@
 				},
 				success : function(data) {
 
-					console.log(JSON.stringify(data));
-
 					if (data.error) {
 						$('#judge_otp_no').attr("title", data.message);
 						$('#judge_otp_no_button').attr("title", data.message);
@@ -475,7 +473,7 @@
 					}
 				},
 				error: function(data) {
-					console.log(data);
+					console.log(JSON.stringify(data));
 				}
 			});
 		}
