@@ -268,7 +268,7 @@
 				<link
 					rel  = "stylesheet"
 					type = "text/css"
-					href = "/lib/css/tabroom.v44.css"
+					href = "/lib/css/tabroom.v45.css"
 				>
 
 %				if ($defaults->{"fabulous"} || $ARGS{"fabulous"}) {
