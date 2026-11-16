@@ -34,16 +34,31 @@
         return %{JSON::decode_json($school->setting("release_forms"))};
     };
 
+	unless ($school && $student) {
+		$m->comp("/funclib/abort.mas",
+			message => "No such student found on your roster."
+		);
+	}
+
 	my $verify_sth = $dbh->prepare("
 		select
-			entry.id
-		from entry, entry_student es
-		where entry.school = ?
-		and entry.id = es.entry
-		and es.student = ?
+			student.id
+		from student, school
+		where student.id = ?
+		and school.id = ?
+		and (
+			student.chapter = school.chapter
+			or exists (
+				select es.id
+				from entry, entry_student es
+				where entry.school = school.id
+				and entry.id = es.entry
+				and es.student = student.id
+			)
+		)
 	");
 
-	$verify_sth->execute($school->id, $student->id);
+	$verify_sth->execute($student->id, $school->id);
 	my $ok = $verify_sth->fetch_hash();
 
 	unless ($ok && (keys %{$ok})) {
@@ -131,6 +146,7 @@
 	}
 
 	$err = $err || $msg || "No valid upload processed";
+	undef $err if $err eq $msg;
 	$m->redirect("by_person_edit.mhtml?school_id=".$school->id."&student_id=".$student->id."&err=$err&msg=$msg");
 
 </%init>
